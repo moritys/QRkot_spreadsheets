@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy import and_, between, func, or_, select, text
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.base import CRUDBase
@@ -97,7 +97,7 @@ class CRUDCharityProject(CRUDBase):
                 CharityProject.create_date,
                 CharityProject.description
             ]).where(
-                CharityProject.fully_invested == True
+                CharityProject.fully_invested is True
             ).group_by(CharityProject.name)
         )
         projects = projects.all()

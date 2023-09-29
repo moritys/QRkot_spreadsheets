@@ -1,7 +1,5 @@
 from datetime import datetime
 
-from operator import itemgetter
-
 from aiogoogle import Aiogoogle
 
 from app.core.config import settings
@@ -70,7 +68,7 @@ async def spreadsheets_update_value(
         'majorDimension': 'ROWS',
         'values': table_values
     }
-    response = await wrapper_services.as_service_account(
+    response = await wrapper_services.as_service_account(  # noqa
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
             range='A1:E30',
