@@ -93,10 +93,8 @@ class CRUDCharityProject(CRUDBase):
         projects = await session.execute(
             select([
                 CharityProject.name,
-                (
-                    func.julianday(CharityProject.close_date) -
-                    func.julianday(CharityProject.create_date)
-                ),
+                CharityProject.close_date,
+                CharityProject.create_date,
                 CharityProject.description
             ]).where(
                 CharityProject.fully_invested == True

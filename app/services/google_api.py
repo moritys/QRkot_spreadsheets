@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from operator import itemgetter
+
 from aiogoogle import Aiogoogle
 
 from app.core.config import settings
@@ -60,11 +62,10 @@ async def spreadsheets_update_value(
     for project in projects:
         new_row = [
             str(project['name']),
-            str(project['julianday']),
+            str(project['close_date'] - project['create_date']),
             str(project['description'])
         ]
         table_values.append(new_row)
-
     update_body = {
         'majorDimension': 'ROWS',
         'values': table_values
